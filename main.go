@@ -22,7 +22,7 @@ func main() {
 	flag.Parse()
 	ctx := context.Background()
 
-	store, err := storage.NewDatabase(ctx, "mongodb://localhost:27017", "booking-go", "user-info")
+	store, err := storage.NewDatabase(ctx, "mongodb+srv://"+os.Getenv("USERNAME")+":"+os.Getenv("PASSWORD")+"@cluster0.imrset9.mongodb.net/?retryWrites=true&w=majority", "booking-go", "user-info")
 	if err != nil {
 		log.Fatalf("failed to create database: %v", err)
 	}
