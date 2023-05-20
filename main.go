@@ -36,7 +36,7 @@ func main() {
 	}()
 
 	newServer := server.NewServer(*listener, store)
-	fmt.Println("newServer running at port", *listener)
+	fmt.Println("NewServer running at port", *listener)
 
 	log.Fatal(newServer.StartServer())
 }
