@@ -3,13 +3,13 @@ package server
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/Arjune7/booking-go/storage"
 	"github.com/Arjune7/booking-go/types"
 	"github.com/cloudinary/cloudinary-go/v2"
+
+	//"github.com/cloudinary/cloudinary-go/v2"
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 	"io"
 	"mime/multipart"
@@ -152,12 +152,12 @@ func (s *Server) HandleAddDestination(w http.ResponseWriter, r *http.Request) er
 	placeId := r.FormValue("placeId")
 	placeType := r.FormValue("placeType")
 
-	err = godotenv.Load()
-	if err != nil {
-		// Handle the error if the .env file couldn't be loaded
-		fmt.Printf("Error loading .env file: %v\n", err)
-		return writeJSON(w, http.StatusInternalServerError, ApiError{Error: err.Error()})
-	}
+	//err = godotenv.Load()
+	//if err != nil {
+	//	// Handle the error if the .env file couldn't be loaded
+	//	fmt.Printf("Error loading .env file: %v\n", err)
+	//	return writeJSON(w, http.StatusInternalServerError, ApiError{Error: err.Error()})
+	//}
 
 	cld, err := cloudinary.NewFromParams(os.Getenv("CLOUD_NAME"), os.Getenv("API_KEY"), os.Getenv("API_SECRET"))
 	if err != nil {
