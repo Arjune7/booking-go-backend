@@ -39,7 +39,7 @@ func (m *mongoStore) HandleGetAllDestinations() ([]*types.Destination, error) {
 
 func (m *mongoStore) HandleAddDestination(name, location, price, hostId, rating, placeID, placeType, Photos string) (*types.Destination, error) {
 	coll := m.client.Database(m.db.Name()).Collection("Destinations")
-	doc := bson.M{"name": name, "location": location, "price": price, "hostId": hostId, "rating": rating, "placeID": placeID, "placeType": placeType}
+	doc := bson.M{"name": name, "location": location, "price": price, "hostId": hostId, "rating": rating, "placeID": placeID, "placeType": placeType, "Photos": Photos}
 
 	_, err := coll.InsertOne(context.Background(), doc)
 	if err != nil {
