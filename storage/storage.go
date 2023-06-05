@@ -14,7 +14,7 @@ type Storage interface {
 	//booking and place functions
 
 	HandleGetAllDestinations() ([]*types.Destination, error)
-	HandleAddDestination(name, location, price, hostId, rating, placeId, placeType, Photos string) (*types.Destination, error)
+	HandleAddDestination(name, location, price, hostId, rating,placeType, Photos string) (*types.Destination, error)
 
 	HandleGetCategories() ([]*types.Categories, error)
 	HandleAddCategories(name, iconName string) (*types.Categories, error)

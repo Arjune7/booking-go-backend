@@ -4,6 +4,7 @@ import (
 	"fmt"
 	// "os"
 
+	"github.com/Arjune7/booking-go/helper"
 	"github.com/Arjune7/booking-go/types"
 	"go.mongodb.org/mongo-driver/bson"
 
@@ -37,8 +38,9 @@ func (m *mongoStore) HandleGetAllDestinations() ([]*types.Destination, error) {
 	return destinations, nil
 }
 
-func (m *mongoStore) HandleAddDestination(name, location, price, hostId, rating, placeID, placeType, Photos string) (*types.Destination, error) {
+func (m *mongoStore) HandleAddDestination(name, location, price, hostId, rating, placeType, Photos string) (*types.Destination, error) {
 	coll := m.client.Database(m.db.Name()).Collection("Destinations")
+	placeID := helper.HandleRandomId()
 	doc := bson.M{"name": name, "location": location, "price": price, "hostId": hostId, "rating": rating, "placeID": placeID, "placeType": placeType, "Photos": Photos}
 
 	_, err := coll.InsertOne(context.Background(), doc)

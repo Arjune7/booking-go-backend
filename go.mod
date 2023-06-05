@@ -10,9 +10,7 @@ require (
 	github.com/rs/cors v1.9.0
 	go.mongodb.org/mongo-driver v1.11.6
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d
-)
 
-require (
 	github.com/creasty/defaults v1.5.1 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/uuid v1.2.0 // indirect

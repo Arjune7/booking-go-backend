@@ -3,18 +3,23 @@ package server
 import (
 	"context"
 	"encoding/json"
+	// "fmt"
+
 	"github.com/Arjune7/booking-go/storage"
 	"github.com/Arjune7/booking-go/types"
 	"github.com/cloudinary/cloudinary-go/v2"
 
 	//"github.com/cloudinary/cloudinary-go/v2"
-	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
-	"github.com/gorilla/mux"
-	"github.com/rs/cors"
 	"io"
 	"mime/multipart"
 	"net/http"
 	"os"
+
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
+	"github.com/gorilla/mux"
+
+	// "github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 type Server struct {
@@ -149,15 +154,14 @@ func (s *Server) HandleAddDestination(w http.ResponseWriter, r *http.Request) er
 	price := r.FormValue("price")
 	hostId := r.FormValue("hostId")
 	rating := r.FormValue("rating")
-	placeId := r.FormValue("placeId")
 	placeType := r.FormValue("placeType")
 
-	//err = godotenv.Load()
-	//if err != nil {
-	//	// Handle the error if the .env file couldn't be loaded
-	//	fmt.Printf("Error loading .env file: %v\n", err)
-	//	return writeJSON(w, http.StatusInternalServerError, ApiError{Error: err.Error()})
-	//}
+	// err = godotenv.Load()
+	// if err != nil {
+	// 	// Handle the error if the .env file couldn't be loaded
+	// 	fmt.Printf("Error loading .env file: %v\n", err)
+	// 	return writeJSON(w, http.StatusInternalServerError, ApiError{Error: err.Error()})
+	// }
 
 	cld, err := cloudinary.NewFromParams(os.Getenv("CLOUD_NAME"), os.Getenv("API_KEY"), os.Getenv("API_SECRET"))
 	if err != nil {
@@ -208,7 +212,10 @@ func (s *Server) HandleAddDestination(w http.ResponseWriter, r *http.Request) er
 	if err != nil {
 		return writeJSON(w, http.StatusInternalServerError, ApiError{Error: err.Error()})
 	}
-	destination, err := s.store.HandleAddDestination(name, location, price, hostId, rating, placeId, placeType, result.SecureURL)
+	destination, err := s.store.HandleAddDestination(name, location, price, hostId, rating, placeType, result.SecureURL)
+	if err != nil {
+		return writeJSON(w, http.StatusInternalServerError, ApiError{Error: err.Error()})
+	}
 
 	return writeJSON(w, http.StatusOK, destination)
 }

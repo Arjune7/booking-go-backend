@@ -2,6 +2,7 @@ package helper
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -22,7 +23,7 @@ func HandleHashPassword(password string) (string, error) {
 }
 
 func HandleComparePassword(password, hashedPassword string) bool {
-	res := bcrypt.CompareHashAndPassword([]byte(hashedPassword) , []byte(password))
+	res := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 	fmt.Println(res)
 	return res == nil
 }
@@ -42,4 +43,17 @@ func HandleGenerateToken(email, password string) (string, error) {
 		return "", fmt.Errorf("failed to create token : %v", err)
 	}
 	return signedToken, nil
+}
+
+func HandleRandomId() string {
+	rand.Seed(time.Now().UnixNano())
+
+	chars := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	id := make([]byte, 5)
+
+	for i := range id {
+		id[i] = chars[rand.Intn(len(chars))]
+	}
+
+	return string(id)
 }
